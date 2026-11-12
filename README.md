@@ -79,6 +79,8 @@ Uzbek aliases also work: `blok`, `ruxsat`, `sayt`, `dastur`, `qurilmalar`, `yord
 
 ### 🔨 Building the EXE
 
+**Prebuilt binary.** A ready-to-run `dist/FirewallDashboard.exe` (v2, script embedded) is committed in the repo. Verify it against `dist/FirewallDashboard.exe.sha256` before running. It is unsigned, so SmartScreen may warn (*More info → Run anyway*). For a fully trusted build, compile it yourself on Windows with the command below.
+
 **With the included launcher.** No extra tools are needed; `csc.exe` ships with .NET Framework:
 
 ```powershell
@@ -180,6 +182,8 @@ O'zbekcha sinonimlar ham ishlaydi: `blok`, `ruxsat`, `sayt`, `dastur`, `qurilmal
 - **EXE launcher.** `Launcher.cs` ichiga skript resurs sifatida joylangan kichik C# dastur. U administrator huquqini so'raydi, skriptni `%TEMP%` ga (UTF-8 BOM bilan) chiqaradi, PowerShell'da yashirin oynada ishga tushiradi va yopilganda vaqtinchalik faylni o'chiradi.
 
 ### 🔨 EXE yig'ish
+
+**Tayyor fayl.** Repoda tayyor `dist/FirewallDashboard.exe` (v2, skript ichiga joylangan) bor. Ishga tushirishdan oldin `dist/FirewallDashboard.exe.sha256` bilan solishtiring. Imzolanmagan — SmartScreen ogohlantirishi mumkin (*More info → Run anyway*). To'liq ishonchli natija uchun quyidagi buyruq bilan o'z Windows'ingizda qayta yig'ing.
 
 **Repodagi launcher bilan.** Qo'shimcha dastur kerak emas, `csc.exe` .NET Framework bilan birga keladi:
 
