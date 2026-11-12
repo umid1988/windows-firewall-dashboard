@@ -774,6 +774,82 @@ $txtConnInfo.Multiline  = $true; $txtConnInfo.ReadOnly = $true; $txtConnInfo.Scr
 $txtConnInfo.BackColor  = $clrPanel; $txtConnInfo.ForeColor = $clrText; $txtConnInfo.Font = $fontMono9
 $pnlRem.Controls.Add($txtConnInfo)
 
+# ----- Kirish hisoblari (RDP / SSH uchun lokal foydalanuvchi) -----
+$pnlUsers           = New-Object System.Windows.Forms.Panel
+$pnlUsers.Size      = New-Object System.Drawing.Size(992,188); $pnlUsers.Location = New-Object System.Drawing.Point(12,520)
+$pnlUsers.BackColor = $clrPanel
+$pnlRem.Controls.Add($pnlUsers)
+
+$lblUsersT          = New-Object System.Windows.Forms.Label
+$lblUsersT.Text     = "Kirish hisoblari — RDP / SSH uchun lokal foydalanuvchi"
+$lblUsersT.Font     = $fontBold; $lblUsersT.Location = New-Object System.Drawing.Point(12,10); $lblUsersT.AutoSize = $true
+$pnlUsers.Controls.Add($lblUsersT)
+
+$lblUN              = New-Object System.Windows.Forms.Label
+$lblUN.Text         = "Nom:"; $lblUN.Location = New-Object System.Drawing.Point(12,46); $lblUN.AutoSize = $true
+$pnlUsers.Controls.Add($lblUN)
+$txtUserName            = New-Object System.Windows.Forms.TextBox
+$txtUserName.Location   = New-Object System.Drawing.Point(60,42); $txtUserName.Size = New-Object System.Drawing.Size(150,24)
+$txtUserName.BackColor  = $clrBg; $txtUserName.ForeColor = $clrText
+$pnlUsers.Controls.Add($txtUserName)
+
+$lblUP              = New-Object System.Windows.Forms.Label
+$lblUP.Text         = "Parol:"; $lblUP.Location = New-Object System.Drawing.Point(225,46); $lblUP.AutoSize = $true
+$pnlUsers.Controls.Add($lblUP)
+$txtUserPass            = New-Object System.Windows.Forms.TextBox
+$txtUserPass.Location   = New-Object System.Drawing.Point(275,42); $txtUserPass.Size = New-Object System.Drawing.Size(155,24)
+$txtUserPass.BackColor  = $clrBg; $txtUserPass.ForeColor = $clrText
+$pnlUsers.Controls.Add($txtUserPass)
+
+$chkUserRdp             = New-Object System.Windows.Forms.CheckBox
+$chkUserRdp.Text        = "RDP kirish huquqi (Remote Desktop Users)"
+$chkUserRdp.Location    = New-Object System.Drawing.Point(450,40); $chkUserRdp.Size = New-Object System.Drawing.Size(320,22)
+$chkUserRdp.ForeColor   = $clrText; $chkUserRdp.Checked = $true
+$pnlUsers.Controls.Add($chkUserRdp)
+
+$chkUserAdmin           = New-Object System.Windows.Forms.CheckBox
+$chkUserAdmin.Text      = "Administrator (to'liq huquq — ehtiyot bo'ling)"
+$chkUserAdmin.Location  = New-Object System.Drawing.Point(450,64); $chkUserAdmin.Size = New-Object System.Drawing.Size(320,22)
+$chkUserAdmin.ForeColor = $clrText
+$pnlUsers.Controls.Add($chkUserAdmin)
+
+$btnUserCreate           = New-Object System.Windows.Forms.Button
+$btnUserCreate.Text      = "Yaratish / parolni yangilash"
+$btnUserCreate.Size      = New-Object System.Drawing.Size(220,30); $btnUserCreate.Location = New-Object System.Drawing.Point(12,80)
+$btnUserCreate.FlatStyle = 'Flat'; $btnUserCreate.BackColor = $clrGreen; $btnUserCreate.ForeColor = $clrText
+$pnlUsers.Controls.Add($btnUserCreate)
+
+$btnUserRdpQuick           = New-Object System.Windows.Forms.Button
+$btnUserRdpQuick.Text      = "Namuna: rdp / rdp123"
+$btnUserRdpQuick.Size      = New-Object System.Drawing.Size(185,30); $btnUserRdpQuick.Location = New-Object System.Drawing.Point(242,80)
+$btnUserRdpQuick.FlatStyle = 'Flat'; $btnUserRdpQuick.ForeColor = $clrText
+$pnlUsers.Controls.Add($btnUserRdpQuick)
+
+$btnUserSshQuick           = New-Object System.Windows.Forms.Button
+$btnUserSshQuick.Text      = "Namuna: ssh / sh123"
+$btnUserSshQuick.Size      = New-Object System.Drawing.Size(185,30); $btnUserSshQuick.Location = New-Object System.Drawing.Point(437,80)
+$btnUserSshQuick.FlatStyle = 'Flat'; $btnUserSshQuick.ForeColor = $clrText
+$pnlUsers.Controls.Add($btnUserSshQuick)
+
+$lblUsersList           = New-Object System.Windows.Forms.Label
+$lblUsersList.Text      = "Dashboard hisoblari:"; $lblUsersList.Location = New-Object System.Drawing.Point(12,124); $lblUsersList.AutoSize = $true
+$pnlUsers.Controls.Add($lblUsersList)
+$cmbUsers               = New-Object System.Windows.Forms.ComboBox
+$cmbUsers.Location      = New-Object System.Drawing.Point(150,120); $cmbUsers.Size = New-Object System.Drawing.Size(280,24)
+$cmbUsers.DropDownStyle = 'DropDownList'; $cmbUsers.BackColor = $clrBg; $cmbUsers.ForeColor = $clrText
+$pnlUsers.Controls.Add($cmbUsers)
+$btnUserDelete           = New-Object System.Windows.Forms.Button
+$btnUserDelete.Text      = "O'chirish"; $btnUserDelete.Size = New-Object System.Drawing.Size(120,26)
+$btnUserDelete.Location  = New-Object System.Drawing.Point(440,119); $btnUserDelete.FlatStyle = 'Flat'
+$btnUserDelete.BackColor = $clrRed; $btnUserDelete.ForeColor = $clrText
+$pnlUsers.Controls.Add($btnUserDelete)
+
+$lblUserHint            = New-Object System.Windows.Forms.Label
+$lblUserHint.Text       = "SSH: shu nom+parol bilan kiriladi.  RDP: 'RDP kirish huquqi' belgilangan bo'lsa.  Zaif parol (rdp123/sh123) faqat lokal/sinov uchun — internetga ochmang."
+$lblUserHint.Location   = New-Object System.Drawing.Point(12,156); $lblUserHint.Size = New-Object System.Drawing.Size(970,24)
+$lblUserHint.ForeColor  = [System.Drawing.Color]::Gray
+$pnlUsers.Controls.Add($lblUserHint)
+
 $sshTimer          = New-Object System.Windows.Forms.Timer
 $sshTimer.Interval = 2000
 
@@ -1385,6 +1461,100 @@ function Get-ConnectInfo {
     return ($lines -join "`r`n")
 }
 
+# ==============================================================
+#  Kirish hisoblari — lokal foydalanuvchilarni boshqarish
+#  Faqat shu dashboard yaratgan (FWDASH-managed teg) hisoblar
+#  o'zgartiriladi/o'chiriladi. Boshqa hisoblarga tegilmaydi.
+# ==============================================================
+$script:FwUserTag = 'FWDASH-managed'
+
+function Test-ValidUserName($u) {
+    if (-not $u) { return $false }
+    if ($u.Length -gt 20) { return $false }
+    if ($u -notmatch '^[A-Za-z0-9._-]+$') { return $false }
+    return $true
+}
+# Lokal guruh nomini SID orqali topish (nom tilga bog'liq bo'lishi mumkin)
+function Resolve-LocalGroupName($sid) {
+    try {
+        return (New-Object System.Security.Principal.SecurityIdentifier($sid)
+            ).Translate([System.Security.Principal.NTAccount]).Value -replace '^.*\\',''
+    } catch { return $null }
+}
+# S-1-5-32-555 = Remote Desktop Users, S-1-5-32-544 = Administrators
+function Add-UserToGroup($name, $sid) {
+    $g = Resolve-LocalGroupName $sid
+    if (-not $g) { return $null }
+    & net localgroup $g $name /add 2>&1 | Out-Null
+    return $g
+}
+function Test-FwManagedUser($name) {
+    $wu = Get-CimInstance Win32_UserAccount -Filter "LocalAccount=True AND Name='$name'" -ErrorAction SilentlyContinue
+    return ($wu -and $wu.Description -like "*$script:FwUserTag*")
+}
+function Get-FwUsers {
+    $out = @()
+    try {
+        $out = Get-CimInstance Win32_UserAccount -Filter "LocalAccount=True" -ErrorAction Stop |
+            Where-Object { $_.Description -like "*$script:FwUserTag*" } |
+            Select-Object -ExpandProperty Name
+    } catch {}
+    return @($out)
+}
+function New-AccessUser($name, $password, [switch]$Rdp, [switch]$Admin) {
+    if (-not (Test-ValidUserName $name)) { return "Nom noto'g'ri: faqat harf/raqam/._- va 20 belgigacha." }
+    if (-not $password) { return "Parol bo'sh bo'lmasin." }
+    $desc    = "$script:FwUserTag access account"
+    $exists  = $null -ne (Get-CimInstance Win32_UserAccount -Filter "LocalAccount=True AND Name='$name'" -ErrorAction SilentlyContinue)
+    if ($exists -and -not (Test-FwManagedUser $name)) {
+        return "'$name' allaqachon mavjud va uni dashboard yaratmagan. Xavfsizlik uchun tegilmaydi."
+    }
+    $updated = $exists
+    if (Get-Command New-LocalUser -ErrorAction SilentlyContinue) {
+        # Parolni buyruq qatoriga chiqarmaydigan xavfsizroq yo'l
+        $sec = ConvertTo-SecureString $password -AsPlainText -Force
+        if ($exists) {
+            Set-LocalUser -Name $name -Password $sec -ErrorAction Stop
+        } else {
+            New-LocalUser -Name $name -Password $sec -Description $desc -AccountNeverExpires -ErrorAction Stop | Out-Null
+        }
+        try { Set-LocalUser -Name $name -PasswordNeverExpires $true -ErrorAction SilentlyContinue } catch {}
+        Enable-LocalUser -Name $name -ErrorAction SilentlyContinue
+    } else {
+        # Eski tizimlar uchun net.exe orqali
+        if ($exists) {
+            & net user $name $password 2>&1 | Out-Null
+        } else {
+            & net user $name $password /add /active:yes /expires:never "/comment:$desc" /y 2>&1 | Out-Null
+            if ($LASTEXITCODE -ne 0) { return "Yaratishda xato — parol Windows parol siyosatiga mos kelmasligi mumkin." }
+        }
+    }
+    $groups = @()
+    if ($Rdp)   { $g = Add-UserToGroup $name 'S-1-5-32-555'; if ($g) { $groups += $g } }
+    if ($Admin) { $g = Add-UserToGroup $name 'S-1-5-32-544'; if ($g) { $groups += $g } }
+    $verb = if ($updated) { "yangilandi (parol o'zgardi)" } else { "yaratildi" }
+    $gtxt = if ($groups) { "  Guruh(lar): $($groups -join ', ')." } else { "  (guruhsiz — SSH ishlaydi, RDP uchun 'RDP kirish huquqi' kerak)" }
+    return "Hisob '$name' $verb.$gtxt"
+}
+function Remove-AccessUser($name) {
+    if (-not $name) { return "Foydalanuvchi tanlang." }
+    if ($name -notin (Get-FwUsers)) { return "'$name' dashboard ro'yxatida yo'q — xavfsizlik uchun o'chirilmaydi." }
+    if (Get-Command Remove-LocalUser -ErrorAction SilentlyContinue) {
+        Remove-LocalUser -Name $name -ErrorAction Stop
+    } else {
+        & net user $name /delete 2>&1 | Out-Null
+        if ($LASTEXITCODE -ne 0) { return "O'chirishda xato: '$name'." }
+    }
+    return "Hisob '$name' o'chirildi."
+}
+function Refresh-FwUsers {
+    $cmbUsers.Items.Clear()
+    $us = @(Get-FwUsers)
+    if ($us.Count -eq 0) { [void]$cmbUsers.Items.Add("(dashboard hisobi yo'q)") }
+    else { foreach ($u in $us) { [void]$cmbUsers.Items.Add($u) } }
+    if ($cmbUsers.Items.Count) { $cmbUsers.SelectedIndex = 0 }
+}
+
 function Update-RemoteStatus {
     try {
         $r = Get-RdpState
@@ -1400,6 +1570,7 @@ function Update-RemoteStatus {
         }
         if ($lstOpenPorts.Items.Count -eq 0) { [void]$lstOpenPorts.Items.Add("(qo'shimcha ochilgan port yo'q)") }
         $txtConnInfo.Text = Get-ConnectInfo
+        Refresh-FwUsers
     } catch { Set-Status "Holat xatosi: $($_.Exception.Message)" }
 }
 
@@ -1599,6 +1770,31 @@ $btnClosePort.Add_Click({
     if (-not $p) { Set-Status "Port kiriting yoki ro'yxatdan tanlang."; return }
     Set-Status (Close-Port $p $pr); Update-RemoteStatus
 })
+# ---- Kirish hisoblari ----
+$btnUserRdpQuick.Add_Click({ $txtUserName.Text = 'rdp'; $txtUserPass.Text = 'rdp123'; $chkUserRdp.Checked = $true;  $chkUserAdmin.Checked = $false })
+$btnUserSshQuick.Add_Click({ $txtUserName.Text = 'ssh'; $txtUserPass.Text = 'sh123';  $chkUserRdp.Checked = $false; $chkUserAdmin.Checked = $false })
+$btnUserCreate.Add_Click({
+    $n = $txtUserName.Text.Trim(); $p = $txtUserPass.Text
+    if (-not $n) { Set-Status "Foydalanuvchi nomini kiriting."; return }
+    if (-not $p) { Set-Status "Parolni kiriting."; return }
+    if ($p.Length -lt 8) {
+        $w = "Parol juda zaif ($($p.Length) belgi). Masofaviy kirish hisobi uchun kuchli parol tavsiya etiladi (12+ belgi).`n`nDavom etasizmi?"
+        if ([System.Windows.Forms.MessageBox]::Show($w, "Zaif parol", 'YesNo', 'Warning') -ne 'Yes') { return }
+    }
+    if ($chkUserAdmin.Checked) {
+        if ([System.Windows.Forms.MessageBox]::Show("'$n' Administrator huquqini oladi (tizimga to'liq kirish). Davom etasizmi?", "Administrator", 'YesNo', 'Warning') -ne 'Yes') { return }
+    }
+    try { $m = New-AccessUser $n $p -Rdp:$chkUserRdp.Checked -Admin:$chkUserAdmin.Checked }
+    catch { $m = "XATO: $($_.Exception.Message)" }
+    Set-Status $m; Write-Console $m; Refresh-FwUsers; Update-RemoteStatus
+})
+$btnUserDelete.Add_Click({
+    $sel = [string]$cmbUsers.SelectedItem
+    if (-not $sel -or $sel -like '(*') { Set-Status "O'chirish uchun hisob tanlang."; return }
+    if ([System.Windows.Forms.MessageBox]::Show("'$sel' hisobini butunlay o'chiramizmi?", "Tasdiq", 'YesNo', 'Question') -ne 'Yes') { return }
+    try { $m = Remove-AccessUser $sel } catch { $m = "XATO: $($_.Exception.Message)" }
+    Set-Status $m; Write-Console $m; Refresh-FwUsers
+})
 $form.Add_FormClosing({ if ($script:SshJob) { $sshTimer.Stop() } })
 
 # Konsol tabi
@@ -1615,6 +1811,7 @@ $form.Add_Shown({
     Refresh-Devices
     Update-BlockedApps
     Start-TrafficMonitor
+    Refresh-FwUsers
     Show-Help
     $form.Activate()
 })
